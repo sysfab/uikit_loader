@@ -4,9 +4,8 @@ local _mt = {
 	__index = function(self, key)
 		if key == "load" then
 			return function(s, module)
-				print(s, module)
 				if s["create"..module.Name] ~= nil then
-					error("uikit_loader:load(module) - '".. module.Name .."' is already loaded")
+					error("uikit_loader:load(module) - '".. module.Name .."' is already loaded", 2)
 				end
 			end
 		end
