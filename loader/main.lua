@@ -22,10 +22,12 @@ local _mt = {
 		end
 
 		if string.sub(key, 1, #"create") == "create" then
-			return function(s, ...)
-				if self.values.ui[key] ~= nil then
+			if self.values.ui[key] ~= nil then
+				return function(s, ...)
 					self.values.ui[key](self.values.ui[key], ...)
-				elseif self.values[key] ~= nil then
+				end
+			elseif self.values[key] ~= nil then
+				return function(s, ...)
 					self.values[key](self.values[key], ...)
 				end
 			end
