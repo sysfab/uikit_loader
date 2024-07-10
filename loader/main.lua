@@ -39,7 +39,7 @@ local _mt = {
 					loadModule(s, modules)
 				else
 					for i, module in ipairs(modules) do
-						loadModule(s, module)
+						loadModule(s, module, i)
 					end
 				end
 			end
