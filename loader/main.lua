@@ -4,9 +4,20 @@ local _mt = {
 	__index = function(self, key)
 		if key == "load" then
 			return function(s, module)
+				if type(module) ~= "table" then
+					error("uikit_loader:load(module) - module should be a table", 2)
+				end
+				if module.Name == nil then
+					error("uikit_loader:load(module) - module must have .Name", 2)
+				end
+				if module.Create == nil then
+					error("uikit_loader:load(module) - module must have .Create", 2)
+				end
 				if s["create"..module.Name] ~= nil then
 					error("uikit_loader:load(module) - '".. module.Name .."' is already loaded", 2)
 				end
+
+				s["create"..module.Name] = module.Create
 			end
 		end
 
@@ -17,7 +28,8 @@ local _mt = {
 		end
 	end,
 	__newindex = function(self, key, value)
-
+		if key == "ui" then return end
+		self.values[key] = value
 	end
 }
 
