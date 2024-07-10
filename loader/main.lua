@@ -2,7 +2,6 @@ local loader = {}
 
 local _mt = {
 	__index = function(self, key)
-		print(key)
 		if key == "load" then
 			return function(s, module)
 				
@@ -32,6 +31,6 @@ loader.load = function(ui)
 	return l
 end
 
-setmetatable(loader, {__call = function(self, ui) self.load(ui) end})
+setmetatable(loader, {__call = function(self, ui) return self.load(ui) end})
 
 return loader
