@@ -28,6 +28,7 @@ loader.load = function(ui)
 		l.ui = require("uikit")
 	end
 
+	setmetatable(l, _mt)
 	return l
 end
 
