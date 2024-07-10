@@ -13,8 +13,17 @@ local _mt = {
 				if module.Create == nil then
 					error("uikit_loader:load(module) - module must have .Create", 2)
 				end
+				if module.Requirements == nil then
+					module.Requirements = {}
+				end
 				if s["create"..module.Name] ~= nil then
 					error("uikit_loader:load(module) - '".. module.Name .."' is already loaded", 2)
+				end
+
+				for i, requirementName in ipairs(module.Requirements) do
+					if s["create"..requirementName] == nil then
+						error("uikit_loader:load(module) - To load '".. module.Name .."' you need to load '".. requirementName .."' first.", 2)
+					end
 				end
 
 				s["create"..module.Name] = module.Create
