@@ -24,9 +24,9 @@ local _mt = {
 		if string.sub(key, 1, #"create") == "create" then
 			return function(s, ...)
 				if self.values.ui[key] ~= nil then
-					self:values.ui[key](...)
+					self.values.ui[key](self.values.ui[key], ...)
 				else
-					self:values[key](...)
+					self.values[key](self.values[key], ...)
 				end
 			end
 		end
