@@ -25,7 +25,7 @@ local _mt = {
 			return function(s, ...)
 				if self.values.ui[key] ~= nil then
 					self.values.ui[key](self.values.ui[key], ...)
-				else
+				elseif self.values[key] ~= nil then
 					self.values[key](self.values[key], ...)
 				end
 			end
