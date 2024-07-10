@@ -2,24 +2,24 @@ local loader = {}
 
 local loadModule = function(s, module)
 	if type(module) ~= "table" then
-		error("uikit_loader:load(module) - module should be a table", 2)
+		error("uikit_loader:load(module) - module should be a table", 3)
 	end
 	if module.Name == nil then
-		error("uikit_loader:load(module) - module must have .Name", 2)
+		error("uikit_loader:load(module) - module must have .Name", 3)
 	end
 	if module.Create == nil then
-		error("uikit_loader:load(module) - module must have .Create", 2)
+		error("uikit_loader:load(module) - module must have .Create", 3)
 	end
 	if module.Requirements == nil then
 		module.Requirements = {}
 	end
 	if s["create"..module.Name] ~= nil then
-		error("uikit_loader:load(module) - '".. module.Name .."' is already loaded", 2)
+		error("uikit_loader:load(module) - '".. module.Name .."' is already loaded", 3)
 	end
 
 	for i, requirementName in ipairs(module.Requirements) do
 		if s["create"..requirementName] == nil then
-			error("uikit_loader:load(module) - To load '".. module.Name .."' you need to load '".. requirementName .."' first.", 2)
+			error("uikit_loader:load(module) - To load '".. module.Name .."' you need to load '".. requirementName .."' first.", 3)
 		end
 	end
 
