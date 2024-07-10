@@ -21,6 +21,16 @@ local _mt = {
 			end
 		end
 
+		if string.sub(key, 1, #"create") == "create" then
+			return function(s, ...)
+				if self.values.ui[key] ~= nil then
+					self:values.ui[key](...)
+				else
+					self:values[key](...)
+				end
+			end
+		end
+
 		if self.values.ui[key] ~= nil then
 			return self.values.ui[key]
 		else
