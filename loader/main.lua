@@ -31,6 +31,6 @@ loader.load = function(ui)
 	return l
 end
 
-setmetatable(loader, {__call = function(self, ...) self.load(...) end})
+setmetatable(loader, {__call = function(self, ...) self:load(...) end})
 
 return loader
