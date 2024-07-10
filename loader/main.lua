@@ -1,25 +1,30 @@
 local loader = {}
 
-local loadModule = function(s, module)
+local loadModule = function(s, module, i)
+	local i_string = ""
+	if i ~= nil then
+		i_string = " [Module index: "..i.."]"
+	end
+
 	if type(module) ~= "table" then
-		error("uikit_loader:load(module) - module should be a table", 3)
+		error("uikit_loader:load(module) - module should be a table"..i_string, 3)
 	end
 	if module.Name == nil then
-		error("uikit_loader:load(module) - module must have .Name", 3)
+		error("uikit_loader:load(module) - module must have .Name"..i_string, 3)
 	end
 	if module.Create == nil then
-		error("uikit_loader:load(module) - module must have .Create", 3)
+		error("uikit_loader:load(module) - module must have .Create"..i_string, 3)
 	end
 	if module.Requirements == nil then
 		module.Requirements = {}
 	end
 	if s["create"..module.Name] ~= nil then
-		error("uikit_loader:load(module) - '".. module.Name .."' is already loaded", 3)
+		error("uikit_loader:load(module) - '".. module.Name .."' is already loaded"..i_string, 3)
 	end
 
 	for i, requirementName in ipairs(module.Requirements) do
 		if s["create"..requirementName] == nil then
-			error("uikit_loader:load(module) - To load '".. module.Name .."' you need to load '".. requirementName .."' first.", 3)
+			error("uikit_loader:load(module) - To load '".. module.Name .."' you need to load '".. requirementName .."' first."..i_string, 3)
 		end
 	end
 
